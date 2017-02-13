@@ -35,7 +35,8 @@ public class ProtoClientHandler extends ChannelInboundHandlerAdapter {
 
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-		
+		String string = (String)msg;
+		System.out.println(string);
 	}
 
 	@Override

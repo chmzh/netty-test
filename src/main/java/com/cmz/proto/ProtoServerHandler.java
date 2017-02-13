@@ -20,6 +20,7 @@ public class ProtoServerHandler extends ChannelInboundHandlerAdapter {
 		Login login = request.getExtension(Protocol.login);
 		System.out.println("user:" + login.getUser());
 		System.out.println("psw:" + login.getPswd());
+		ctx.channel().writeAndFlush("登陆成功");
 	}
 
 	@Override

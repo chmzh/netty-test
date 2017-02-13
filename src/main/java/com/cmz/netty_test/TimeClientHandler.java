@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 
 public class TimeClientHandler extends ChannelInboundHandlerAdapter {
-
+	private int count;
 	private static final Logger logger = Logger.getLogger(TimeClientHandler.class.getName());
 
 	byte[] req;
@@ -44,7 +44,7 @@ public class TimeClientHandler extends ChannelInboundHandlerAdapter {
 		byte[] req = new byte[buf.readableBytes()];
 		buf.readBytes(req);
 		String body = new String(req, "UTF-8");
-		System.out.println("Now is : " + body);
+		System.out.println("Now is : " + body+".count="+count++);
 	}
 
 	@Override

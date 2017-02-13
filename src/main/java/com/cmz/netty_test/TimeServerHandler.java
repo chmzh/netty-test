@@ -9,7 +9,7 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 
 
 public class TimeServerHandler extends ChannelInboundHandlerAdapter {
-
+	private int count;
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg)
 	    throws Exception {
@@ -17,7 +17,7 @@ public class TimeServerHandler extends ChannelInboundHandlerAdapter {
 	byte[] req = new byte[buf.readableBytes()];
 	buf.readBytes(req);
 	String body = new String(req, "UTF-8");
-	System.out.println("The time server receive order : " + body);
+	System.out.println("The time server receive order : " + body+".count="+count++);
 	String currentTime = "QUERY TIME ORDER".equalsIgnoreCase(body) ? new java.util.Date(
 		System.currentTimeMillis()).toString() : "BAD ORDER";
 		/*

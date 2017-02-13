@@ -8,9 +8,16 @@ message Request {
 
 extend Request {
   optional Login login = 100;
+  optional PK pk = 101;
 }
- 
+
+
 message Login {
   required string user = 1;
   required string pswd = 2;
+}
+
+message PK {
+  required string uid1 = 1;
+  required string uid2 = 2;
 }

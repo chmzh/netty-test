@@ -25,7 +25,7 @@ public class ProtoClientHandler extends ChannelInboundHandlerAdapter {
 		Login login = Login.newBuilder().setUser("ksfzhaohui")
 				.setPswd("11111111").build();
 		Request.Builder builder = Request.newBuilder();
-		builder.setCmdId(100);
+		builder.setCmdId(10001);
 		builder.setExtension(Protocol.login, login);
 		Request request = builder.build();
 

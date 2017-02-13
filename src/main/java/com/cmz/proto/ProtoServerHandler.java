@@ -17,7 +17,8 @@ public class ProtoServerHandler extends ChannelInboundHandlerAdapter {
 	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
 		Request request = (Request)msg;
 		System.out.println("cmd:" + request.getCmdId());
-		Login login = request.getExtension(Protocol.login);
+		//Login login = request.getExtension(Protocol.login);
+		Login login = (Login)request.getExtension(CmdMapping.getByCmdId(request.getCmdId()));
 		System.out.println("user:" + login.getUser());
 		System.out.println("psw:" + login.getPswd());
 		ctx.channel().writeAndFlush("登陆成功");

@@ -43,6 +43,7 @@ public class TimeClientHandler extends ChannelInboundHandlerAdapter {
 				public void operationComplete(ChannelFuture future) throws Exception {
 					if(future.isSuccess()){
 						System.out.println("发送成功");
+						future.channel().close();
 					}
 					
 				}

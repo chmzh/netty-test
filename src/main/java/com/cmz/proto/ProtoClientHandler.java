@@ -21,16 +21,16 @@ public class ProtoClientHandler extends ChannelInboundHandlerAdapter {
 
 	@Override
 	public void channelActive(ChannelHandlerContext ctx) {
+		for(int i=0;i<100;i++){
+			Login login = Login.newBuilder().setUser("ksfzhaohui")
+					.setPswd("11111111").build();
+			Request.Builder builder = Request.newBuilder();
+			builder.setCmdId(10001);
+			builder.setExtension(Protocol.login, login);
+			Request request = builder.build();
 
-		Login login = Login.newBuilder().setUser("ksfzhaohui")
-				.setPswd("11111111").build();
-		Request.Builder builder = Request.newBuilder();
-		builder.setCmdId(10001);
-		builder.setExtension(Protocol.login, login);
-		Request request = builder.build();
-
-		ctx.writeAndFlush(request);
-
+			ctx.writeAndFlush(request);
+		}
 	}
 
 	@Override

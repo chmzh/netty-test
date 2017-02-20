@@ -27,14 +27,14 @@ public class TimeClientHandler extends ChannelInboundHandlerAdapter {
 	@Override
 	public void channelActive(ChannelHandlerContext ctx) {
 		ByteBuf firstMessage;
-		for (int i = 0; i < 100; i++) {
-			// firstMessage = Unpooled.buffer(4+req.length);
+		//for (int i = 0; i < 100; i++) {
+			 firstMessage = Unpooled.buffer(4+req.length);
 			// firstMessage.writeInt(req.length);
 			// firstMessage.writeBytes(req);
 			// ctx.writeAndFlush(firstMessage);
 			
 			ctx.writeAndFlush("QUERY TIME ORDER");
-		}
+		//}
 
 	}
 

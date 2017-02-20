@@ -3,9 +3,12 @@ package com.cmz.netty_test;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.util.concurrent.SucceededFuture;
 
 import java.util.logging.Logger;
 
@@ -33,7 +36,17 @@ public class TimeClientHandler extends ChannelInboundHandlerAdapter {
 			// firstMessage.writeBytes(req);
 			// ctx.writeAndFlush(firstMessage);
 			
-			ctx.writeAndFlush("QUERY TIME ORDER");
+			ChannelFuture future = ctx.writeAndFlush("QUERY TIME ORDER");
+			future.addListener(new ChannelFutureListener() {
+				
+				@Override
+				public void operationComplete(ChannelFuture future) throws Exception {
+					if(future.isSuccess()){
+						System.out.println("发送成功");
+					}
+					
+				}
+			});
 		//}
 
 	}

@@ -51,8 +51,10 @@ import io.netty.handler.codec.http.multipart.InterfaceHttpData;
 import io.netty.handler.codec.http.multipart.InterfaceHttpData.HttpDataType;
 import io.netty.util.CharsetUtil;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -301,6 +303,14 @@ public class HttpUploadServerHandler extends SimpleChannelInboundHandler<HttpObj
                     } else {
                         responseContent.append("\tFile too long to be printed out:" + fileUpload.length() + "\r\n");
                     }
+                    try {
+                    		
+						fileUpload.setCharset(Charset.forName("UTF-8"));
+						fileUpload.renameTo(new File("11.txt"));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
                     // fileUpload.isInMemory();// tells if the file is in Memory
                     // or on File
                     // fileUpload.renameTo(dest); // enable to move into another

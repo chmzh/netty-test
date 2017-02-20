@@ -18,6 +18,7 @@ package com.cmz.http.upload;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
@@ -53,7 +54,12 @@ import java.util.Map.Entry;
  */
 public final class HttpUploadClient {
 
-    static final String BASE_URL = System.getProperty("baseUrl", "http://127.0.0.1:8080/");
+	static{
+		System.setProperty("javax.net.ssl.trustStore", "/Users/chenmingzhou/Documents/workspace19/netty-test/src/csii_pub.jks");
+		System.setProperty("javax.net.ssl.trustStorePassword", "123456");
+	}
+	
+    static final String BASE_URL = System.getProperty("baseUrl", "https://127.0.0.1:8443/");
     static final String FILE = System.getProperty("file", "upload.txt");
 
     public static void main(String[] args) throws Exception {

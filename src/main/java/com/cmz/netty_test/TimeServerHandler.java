@@ -7,36 +7,40 @@ import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
-
 public class TimeServerHandler extends ChannelInboundHandlerAdapter {
 	private int count;
-    @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg)
-	    throws Exception {
-	ByteBuf buf = (ByteBuf) msg;
-	byte[] req = new byte[buf.readableBytes()];
-	buf.readBytes(req);
-	String body = new String(req, "UTF-8");
-	System.out.println("The time server receive order : " + body+".count="+count++);
-	String currentTime = "QUERY TIME ORDER".equalsIgnoreCase(body) ? new java.util.Date(
-		System.currentTimeMillis()).toString() : "BAD ORDER";
+
+	@Override
+	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+		ByteBuf buf = (ByteBuf) msg;
+		byte[] req = new byte[buf.readableBytes()];
+		buf.readBytes(req);
+		String body = new String(req, "UTF-8");
+		System.out.println("The time server receive order : " + body + ".count=" + count++);
+		String currentTime = "QUERY TIME ORDER".equalsIgnoreCase(body)
+				? new java.util.Date(System.currentTimeMillis()).toString() : "BAD ORDER";
 		/*
-	byte[] response = currentTime.getBytes();
-	ByteBuf resp = Unpooled.buffer(4+response.length);
-	resp.writeInt(response.length);
-	resp.writeBytes(response);
-	resp.write(resp);
-	*/
-	ctx.write(currentTime);
-    }
+		 * byte[] response = currentTime.getBytes(); ByteBuf resp =
+		 * Unpooled.buffer(4+response.length); resp.writeInt(response.length);
+		 * resp.writeBytes(response); resp.write(resp);
+		 */
+		ctx.write(currentTime);
+	}
 
-    @Override
-    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
-	ctx.flush();
-    }
+	@Override
+	public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
+		ctx.flush();
+	}
 
-    @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-	ctx.close();
-    }
+	@Override
+	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+		ctx.close();
+	}
+
+	@Override
+	public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println("客户端已断开");
+		super.handlerRemoved(ctx);
+	}
 }

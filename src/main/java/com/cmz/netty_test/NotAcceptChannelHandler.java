@@ -1,5 +1,7 @@
 package com.cmz.netty_test;
 
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
@@ -22,7 +24,9 @@ public class NotAcceptChannelHandler extends ChannelInboundHandlerAdapter {
 		}
 		
 		if(NOT_ACCEPT){
-			ctx.channel().closeFuture().sync();
+			Channel channel = ctx.channel();
+			ChannelFuture future = channel.closeFuture();
+			future.sync();
 			return;
 		}
 		

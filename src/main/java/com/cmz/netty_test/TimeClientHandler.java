@@ -30,14 +30,14 @@ public class TimeClientHandler extends ChannelInboundHandlerAdapter {
 	@Override
 	public void channelActive(ChannelHandlerContext ctx) {
 		//ByteBuf firstMessage;
-		for (int i = 0; i < 100; i++) {
+		//for (int i = 0; i < 100; i++) {
 			 //firstMessage = Unpooled.buffer(4+req.length);
 			// firstMessage.writeInt(req.length);
 			// firstMessage.writeBytes(req);
 			// ctx.writeAndFlush(firstMessage);
 			
 			ChannelFuture future = ctx.writeAndFlush("QUERY TIME ORDER");
-			//ctx.writeAndFlush("not accept");
+			ctx.writeAndFlush("not accept");
 			//ctx.writeAndFlush("close server");
 //			future.addListener(new ChannelFutureListener() {
 //				
@@ -50,7 +50,7 @@ public class TimeClientHandler extends ChannelInboundHandlerAdapter {
 //					
 //				}
 //			});
-		}
+		//}
 
 	}
 

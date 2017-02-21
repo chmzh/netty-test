@@ -23,8 +23,8 @@ public class TimeClient {
 					.handler(new ChannelInitializer<SocketChannel>() {
 						@Override
 						public void initChannel(SocketChannel ch) throws Exception {
-							ch.pipeline().addLast(new IdleStateHandler(30, 20, 0));
-							ch.pipeline().addLast(new ReadWriteTimeOutHandler());
+							//ch.pipeline().addLast(new IdleStateHandler(30, 20, 0));
+							//ch.pipeline().addLast(new ReadWriteTimeOutHandler());
 							ch.pipeline().addLast(new MyEncoder());
 							ch.pipeline().addLast(new MyDecoder());
 							ch.pipeline().addLast(new TimeClientHandler());

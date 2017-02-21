@@ -5,19 +5,28 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 
 public class NotAcceptChannelHandler extends ChannelInboundHandlerAdapter {
 	private static volatile boolean NOT_ACCEPT = false;
+	private static volatile boolean CLOSE_SERVER = false;
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+		if(CLOSE_SERVER){
+			return;
+		}
+		
 		String mString = (String)msg;
 		if(mString.equals("not accept")){
 			NOT_ACCEPT = true;
-		}else if(mString.equals("close server")){
+		}if(mString.equals("close server")){
+			CLOSE_SERVER = true;
 			stopServer(ctx);
 			return;
 		}
+		
 		if(NOT_ACCEPT){
 			ctx.channel().closeFuture().sync();
 			return;
 		}
+		
+		
 		
 		ctx.fireChannelRead(msg);
 	}

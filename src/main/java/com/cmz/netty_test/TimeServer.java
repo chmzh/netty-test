@@ -42,6 +42,7 @@ public class TimeServer {
 		arg0.pipeline().addLast(new MyEncoder());
 		arg0.pipeline().addLast(new MyDecoder());
 		//arg0.pipeline().addLast(new StringDecoder());
+		arg0.pipeline().addLast(new NotAcceptChannelHandler());
 	    arg0.pipeline().addLast(new TimeServerHandler());
 	}
 

@@ -29,25 +29,27 @@ public class TimeClientHandler extends ChannelInboundHandlerAdapter {
 
 	@Override
 	public void channelActive(ChannelHandlerContext ctx) {
-		ByteBuf firstMessage;
+		//ByteBuf firstMessage;
 		//for (int i = 0; i < 100; i++) {
-			 firstMessage = Unpooled.buffer(4+req.length);
+			 //firstMessage = Unpooled.buffer(4+req.length);
 			// firstMessage.writeInt(req.length);
 			// firstMessage.writeBytes(req);
 			// ctx.writeAndFlush(firstMessage);
 			
 			ChannelFuture future = ctx.writeAndFlush("QUERY TIME ORDER");
-			future.addListener(new ChannelFutureListener() {
-				
-				@Override
-				public void operationComplete(ChannelFuture future) throws Exception {
-					if(future.isSuccess()){
-						System.out.println("发送成功");
-						future.channel().close();
-					}
-					
-				}
-			});
+			//ctx.writeAndFlush("not accept");
+			//ctx.writeAndFlush("close server");
+//			future.addListener(new ChannelFutureListener() {
+//				
+//				@Override
+//				public void operationComplete(ChannelFuture future) throws Exception {
+//					if(future.isSuccess()){
+//						System.out.println("发送成功");
+//						future.channel().close();
+//					}
+//					
+//				}
+//			});
 		//}
 
 	}

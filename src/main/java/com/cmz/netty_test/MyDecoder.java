@@ -27,8 +27,8 @@ public class MyDecoder extends ByteToMessageDecoder {
 
         byte[] body = new byte[dataLength];  //  嗯，这时候，我们读到的长度，满足我们的要求了，把传送过来的数据，取出来吧~~
         in.readBytes(body);  //
-        //String msg = new String(body,"UTF-8");  //将byte数据转化为我们需要的对象。伪代码，用什么序列化，自行选择
-        ByteBuf msg = Unpooled.copiedBuffer(body);
+        String msg = new String(body,"UTF-8");  //将byte数据转化为我们需要的对象。伪代码，用什么序列化，自行选择
+        //ByteBuf msg = Unpooled.copiedBuffer(body);
         out.add(msg);  
 	}
 
